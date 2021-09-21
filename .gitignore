@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+/ks8
+/nginx
+/public
+
 /.pnp
 .pnp.js
 
@@ -11,6 +15,7 @@
 # production
 /build
 
+Dockerfile
 # misc
 .DS_Store
 .env.local

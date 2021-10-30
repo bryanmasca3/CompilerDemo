@@ -1,0 +1,91 @@
+W -> B VARSB'.
+W -> S VARSS'.
+W -> I VARSI'.
+W -> T VARST'.
+
+
+W -> for ( EXP ) do ASIG.
+EXP-> B : B.
+ASIG->{ B B' }.
+
+
+
+ARTS -> [ ARS' ].
+ARTB -> [ ARB' ].
+ARTI -> [ ARI' ].
+ARTT -> [ ART' ].
+
+ARS' -> .
+ARS' -> ELS.
+
+ARB' -> .
+ARB' -> ELB.
+
+ART' -> .
+ART' -> ELT.
+
+ARI' -> .
+ARI' -> ELI.
+
+
+ELS -> A ELS'.
+ELB -> B ELB'.
+ELI -> I ELI'.
+ELT -> T ELT'.
+
+ELS' -> , ELS.
+ELS' -> .
+
+ELB' -> , ELB.
+ELB' -> .
+
+ELI' -> , ELI.
+ELI' -> .
+
+ELT' -> , ELT.
+ELT' -> .
+
+
+B' -> > Y'.
+B' -> + S.
+
+
+L' -> + S.
+
+Y' -> B B'.
+
+Y -> I.
+Y -> T.
+
+
+VARSB' -> =: ARTB.
+VARSB' -> =:: B B'.
+VARSB' -> ID.
+
+VARSS' -> = A.
+VARSS' -> =: ARTS.
+VARSS' -> ID.
+
+VARSI' -> = STR.
+VARSI' -> =: ARTI.
+VARSI' -> =:: I L'.
+VARSI' -> ID.
+
+VARST' -> = STR.
+VARST' -> =: ARTT.
+VARST' -> =:: T L'.
+VARST' -> ID.
+
+
+L -> Y.
+
+ID->aa.
+STR->aa.
+
+
+B -> box.
+I -> img.
+T -> text.
+S -> style.
+A -> attribute.
+attribute -> < STR >.

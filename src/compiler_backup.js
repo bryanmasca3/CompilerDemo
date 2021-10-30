@@ -1,7 +1,10 @@
-const keywords=["box","img","text","style","if","then","else","end"];
-const Operators=["*","-","+",":",">","="];
+const keywords=["int","string"];
+
+const Operators=["*","-","+","="];
+
 const Numbers=/^\d+$/;
 const Letters=/[a-z]/i;
+
 
 const isKeyword=value=>keywords.includes(value);
 const isOperators=value=>Operators.includes(value);
@@ -9,7 +12,7 @@ const isOperators=value=>Operators.includes(value);
 const isLetter=value=>Letters.test(value);
 const isNumber=value=>Numbers.test(value);
 
-//const getTokens=()=>Tokens.map(token=>console.log(token));
+
 
 class Token{
     constructor(lexema,type){
@@ -23,14 +26,15 @@ class Token{
       return this._type;
     }    
   }
-  const Parse = str => str.split(';').map(s => s.trim()).filter(s => s.length);
+
+const SplitCode = str => str.split(';').map(s => s.trim()).filter(s => s.length);
   
 
-
- export const runCompiler=(input)=>{
+ export const Scanner=(sourceCode)=>{
 
     let Tokens=[];
-    const Lines=Parse(input);  
+    
+    const Lines=SplitCode(sourceCode);  
 
     let buffer=[];
     let str="";
@@ -38,7 +42,7 @@ class Token{
     Lines.map(line=>{                    
           let peek = 0;
           while(peek<line.length){
-              if(isOperators(line.charAt(peek))) {Tokens.push(new Token(line.charAt(peek),"operator"));peek++;}
+              if(isOperators(line.charAt(peek))) {Tokens.push(new Token(line.charAt(peek),"SUM"));peek++;}
               if(isLetter(line.charAt(peek))){    
                   do {
                       buffer.push(line.charAt(peek));                    
@@ -47,9 +51,9 @@ class Token{
                             
                   str=buffer.join("");
                   if(isKeyword(str)){
-                      Tokens.push(new Token(str,"keyword"));                                      
+                      Tokens.push(new Token(str,"KEYWORD"));                                      
                   }else{
-                      Tokens.push(new Token(str,"identifier"));                   
+                      Tokens.push(new Token(str,"ID"));                   
                   }
                   buffer=[];
               }
@@ -60,7 +64,7 @@ class Token{
                   } while (isNumber(line.charAt(peek)));
 
                   str=buffer.join("");
-                  Tokens.push(new Token(str,"value"));  
+                  Tokens.push(new Token(str,"id"));  
                   buffer=[];  
               }else{
                 peek++;

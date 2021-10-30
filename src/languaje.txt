@@ -1,0 +1,27 @@
+BOX caja1
+BOX caja2
+BOX caja3
+
+image1 = "path"
+imag2 = "path"
+imag3 = "path"
+
+ATRIB Atribute="color:red"
+ATRIB Atribute1="color:green"
+ATRIB Atribute2="color:yellow"
+
+STYLE style1=[Atribute,Atribute1,Atribute1]
+STYLE style2=[Atribute,Atribute2]
+
+STYLE style2=[{"color":"red"}]
+
+BOXES arr=[caja1,caja2,caja3]
+
+BOX = BOX + STYLE
+BOX = BOX1 - STYLE
+
+BOX = BOX>IMG
+BOX = BOX>TXT
+
+FOR(IT:STYLE)
+    SHOW(IT)

@@ -1,0 +1,30 @@
+text
+img
+box
+[ ]
+text - style
+text + style
+img - style
+img + style
+box > box
+box - style
+box + style
+[ attribute ]
+box > box > box
+box > box - style
+box > box + style
+[ attribute , attribute ]
+box > box > box > box
+box > box > box - style
+box > box > box + style
+[ attribute , attribute , attribute ]
+box > box > box > box > box
+box > box > box > box - style
+box > box > box > box + style
+[ attribute , attribute , attribute , attribute ]
+box > box > box > box > box > box
+box > box > box > box > box - style
+box > box > box > box > box + style
+[ attribute , attribute , attribute , attribute , attribute ]
+box > box > box > box > box > box - style
+box > box > box > box > box > box + style

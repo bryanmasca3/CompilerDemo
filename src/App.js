@@ -5,13 +5,15 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import React, { useState,useEffect } from 'react';
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
 import {runCompiler} from "./compiler";
 
 function App() {
 
   const numArray = 1;
   const [list, updateList] = useState(numArray);
-  const [respo, updateResponse] = useState([]);
+  const [respo, updateResponse] = useState({});
   const [valueCode, setvalueCode] = useState("");
 
   const calcHeight=(value)=>{
@@ -34,21 +36,12 @@ function App() {
 
     };*/
     const handleSubmit = async (e) => {
-     e.preventDefault();
-     
-    // const dataCode = { data: valueCode };
-     //console.log(dataCode)
-     const res= runCompiler(valueCode);
-     //console.log(res);
-     //const res= await axios.post('/py/eval', dataCode);
+     e.preventDefault();    
+     const res = runCompiler(valueCode);
      updateResponse(res);
 
     };
-    const downloadFile=()=>{
-
-      console.log("sd")
-      
-    }
+  
    useEffect(() => {
       const textarea = document.querySelector(".TextCode");
 
@@ -93,12 +86,79 @@ function App() {
             </form>
           </Col>
           <Col className="shellcontent">
-              <Row className="title-section">
+              {/*<Row className="title-section">
                 <Col xs={2} ><div className="text-name">shell </div></Col>
                 <Col xs={{ span: 1, offset: 9 }}><Button variant="outline-info" onClick={downloadFile}>Clear</Button>{' '}</Col>
-              </Row>
-             <Col xs={12} >                   
+              </Row>*/}  
+              <Row className="title-section">
+              <Col xs={12} >  
+                    <Tabs defaultActiveKey="Tokens" id="uncontrolled-tab-example" className="mb-3">
+                      <Tab eventKey="Tokens" title="Tokens">
+                      
                       <table className="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Lexema</th>
+                                  <th scope="col">Type</th>                              
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {respo.token?.map((item,index)=>(
+                                <tr key={index}>
+                                  <th scope="row">{index}</th>
+                                  <td>{item._lexema}</td>
+                                  <td>{item._type}</td>                            
+                                </tr>   
+                                  ))}
+
+                                    </tbody>
+                            </table>                      
+                      </Tab>
+                      <Tab eventKey="Tabla" title="Tabla">
+                        
+                      <table className="table">
+                            <thead>
+                               
+                              </thead>                            
+                              <tbody>
+                                {respo.success?(
+                                respo.table?.map((item,index)=>(
+                                <tr key={index} style={{"textAlign":"center"}}>                                 
+                                    {item.map((it)=>( <td>{it}</td>))}                                                                                                                            
+                                </tr>   
+                                ))):<p>Error</p>}
+
+                                    </tbody>
+                            </table>                  
+                      </Tab>
+                      <Tab eventKey="Seguimiento" title="Seguimiento">              
+                      <table className="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Stack</th>
+                                  <th scope="col">Input</th>
+                                  <th scope="col">Rule</th>
+                                                               
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {respo.success?(respo.algorithm?.map((item,index)=>(
+                                <tr key={index}>
+                                  <th scope="row">{index}</th>
+                                  <td>{item[0]}</td>
+                                  <td>{item[1]}</td> 
+                                  <td>{item[2]}</td>                                                             
+                                </tr>   
+                                  ))):<p>Error</p>}
+
+                                    </tbody>
+                            </table> 
+                      
+                      </Tab>
+                    </Tabs>                 
+                     {/* <table className="table">
                           <thead>
                             <tr>
                               <th scope="col">#</th>
@@ -107,18 +167,21 @@ function App() {
                             </tr>
                           </thead>
                           <tbody>
+                            
                            {respo.map((item,index)=>(
                             <tr key={index}>
                               <th scope="row">{index}</th>
                               <td>{item._lexema}</td>
                               <td>{item._type}</td>                            
                             </tr>   
-                               ))}                        
+                               ))}                      
                           </tbody>
-                        </table>                 
+                        </table>    */}                
                       
                  
               </Col>
+              </Row>
+            
           </Col>
       </Row>
   </Container>
